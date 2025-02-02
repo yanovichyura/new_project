@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 
 function Header() {
+  const { cart } = useContext(CartContext);
+
+  const [itemsInCart, setItemsInCart] = useState(0);
+
+  useEffect(() => {
+    setItemsInCart(cart.reduce((acc, item) => acc + item.quantity, 0) || 0);
+  }, [cart]);
+
   return (
     <header className="header_container">
       <div className="header_logo">
@@ -26,8 +35,7 @@ function Header() {
         </div>
         <div className="header_cart">
           <Link to="/cart">
-
-      <span className="cart-count">1</span>
+            <span className="cart-count">{itemsInCart}</span>
             <img src="../img/header_img/cart.svg" alt="Кошик" />
           </Link>
         </div>

@@ -107,40 +107,173 @@
 // };
 
 // export default Product;
-import React, { useState, useContext } from "react";
+// import React, { useContext, useState } from "react";
+// import { CartContext } from "../context/CartContext";
+
+// const Product = () => {
+//   const { cart, addToCart } = useContext(CartContext);
+//   const [quantity, setQuantity] = useState(1);
+//   const [delivery, setDelivery] = useState("post");
+//   const [paymentPlan, setPaymentPlan] = useState("");
+
+//   const increaseQuantity = () => {
+//     console.log("increaseQuantity");
+//     setQuantity((prev) => prev + 1);
+//   };
+//   const decreaseQuantity = () =>
+//     setQuantity((prev) => (prev > 1 ? prev - 1 : prev));
+
+//   const handleAddToCart = () => {
+//     const product = {
+//       id: 1,
+//       name: "Кросівки Puma X-Ray Speed Mid",
+//       price: 3190,
+//       quantity: quantity,
+//     };
+//     addToCart(product);
+//   };
+
+//   return (
+//     <div>
+//       <section className="product-container">
+//         <div className="product-image">
+//           <img
+//             src="/img/body_img/image_10_bg_removed.png.png"
+//             alt="Кросівки Puma X-Ray Speed Mid"
+//           />
+//         </div>
+
+//         <div className="product-details">
+//           <div>
+//             <h1 className="product-title">
+//               Кросівки <span className="brand">Puma X-Ray Speed Mid</span>
+//             </h1>
+//             <p className="product-price">3190 грн</p>
+//             <button className="add-to-cart" onClick={handleAddToCart}>
+//               <span className="cart-icon">&#128722;</span> +Додати до кошика
+//             </button>
+
+//             <div className="quantity-container">
+//               <span>Кількість</span>
+//               <button className="quantity-button" onClick={decreaseQuantity}>
+//                 -
+//               </button>
+//               <span className="quantity-value">{quantity}</span>
+//               <button className="quantity-button" onClick={increaseQuantity}>
+//                 +
+//               </button>
+//             </div>
+//           </div>
+//           <div className="product-options">
+//             <div className="option">
+//               <label>
+//                 <input
+//                   type="radio"
+//                   name="delivery"
+//                   value="post"
+//                   checked={delivery === "post"}
+//                   onChange={() => setDelivery("post")}
+//                 />{" "}
+//                 Доставка у відділення пошти
+//               </label>
+//             </div>
+//             <div className="option">
+//               <label>
+//                 <input
+//                   type="radio"
+//                   name="delivery"
+//                   value="courier"
+//                   checked={delivery === "courier"}
+//                   onChange={() => setDelivery("courier")}
+//                 />{" "}
+//                 Доставка кур’єром
+//               </label>
+//             </div>
+//             <div className="option">
+//               <label>
+//                 <input
+//                   type="radio"
+//                   name="payment"
+//                   checked={paymentPlan !== ""}
+//                   onChange={() => setPaymentPlan("1 місяць")}
+//                 />{" "}
+//                 Купити на виплату
+//                 <select
+//                   value={paymentPlan}
+//                   onChange={(e) => setPaymentPlan(e.target.value)}
+//                 >
+//                   <option value="">Оберіть період</option>
+//                   <option value="1 місяць">1 місяць</option>
+//                   <option value="3 місяці">3 місяці</option>
+//                   <option value="6 місяців">6 місяців</option>
+//                 </select>
+//               </label>
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+
+//       <div className="container">
+//         <div className="additional-info__wrapper">
+//           <div className="cart-info">
+//             <p className="product-info">
+//               Ціни у інших продавців від 3020 грн до 4099 грн <br />
+//               Вживані ~ 1300 грн
+//             </p>
+//             <p className="free-shipping">БЕЗКОШТОВНА ДОСТАВКА</p>
+//             <div className="product-specs">
+//               <p>Розмір: 42</p>
+//               <p>Матеріал верху: 64,06% шкіра, 35,94% ПУ</p>
+//               <p>Матеріал підошви: Гума</p>
+//               <p>Арт.: 388574_03</p>
+//             </div>
+//             {cart.length > 0 ? (
+//               <p>У кошику {cart.length} товарів</p>
+//             ) : (
+//               <p>Кошик порожній</p>
+//             )}
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Product;
+import React, { useContext, useState } from "react";
+import { useParams } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
+import products from "./Products";
 
 const Product = () => {
+  const { id } = useParams();
   const { cart, addToCart } = useContext(CartContext);
+  const product = products.find((p) => p.id === id);
   const [quantity, setQuantity] = useState(1);
   const [delivery, setDelivery] = useState("post");
   const [paymentPlan, setPaymentPlan] = useState("");
 
+  if (!product) return <h2>Товар не знайдено</h2>;
+
   const increaseQuantity = () => setQuantity((prev) => prev + 1);
-  const decreaseQuantity = () => setQuantity((prev) => (prev > 1 ? prev - 1 : prev));
+  const decreaseQuantity = () =>
+    setQuantity((prev) => (prev > 1 ? prev - 1 : prev));
 
   const handleAddToCart = () => {
-    const product = {
-      id: 1,
-      name: "Кросівки Puma X-Ray Speed Mid",
-      price: 3190,
-      quantity: quantity,
-    };
-    addToCart(product);
-    alert(`${product.name} додано до кошика!`);
+    addToCart({ ...product, quantity });
   };
 
   return (
-    <section className="product-container">
+    <div className="product-container">
       <div className="product-image">
-        <img src="/img/body_img/image_10_bg_removed.png.png" alt="Кросівки Puma X-Ray Speed Mid" />
+        <img src={product.img} alt={product.name} />
       </div>
-
       <div className="product-details">
-        <h1 className="product-title">
-          Кросівки <span className="brand">Puma X-Ray Speed Mid</span>
-        </h1>
-        <p className="product-price">3190 грн</p>
+        <h1>{product.name}</h1>
+        <p>{product.price} грн</p>
+        <button className="add-to-cart" onClick={handleAddToCart}>
+          <span className="cart-icon">&#128722;</span> +Додати до кошика
+        </button>
 
         <div className="quantity-container">
           <span>Кількість</span>
@@ -152,35 +285,41 @@ const Product = () => {
         <div className="product-options">
           <div className="option">
             <label>
-              <input 
-                type="radio" 
-                name="delivery" 
-                value="post" 
-                checked={delivery === "post"} 
+              <input
+                type="radio"
+                name="delivery"
+                value="post"
+                checked={delivery === "post"}
                 onChange={() => setDelivery("post")}
-              /> Доставка у відділення пошти
+              />{" "}
+              Доставка у відділення пошти
             </label>
           </div>
           <div className="option">
             <label>
-              <input 
-                type="radio" 
-                name="delivery" 
-                value="courier" 
-                checked={delivery === "courier"} 
+              <input
+                type="radio"
+                name="delivery"
+                value="courier"
+                checked={delivery === "courier"}
                 onChange={() => setDelivery("courier")}
-              /> Доставка кур’єром
+              />{" "}
+              Доставка кур’єром
             </label>
           </div>
           <div className="option">
             <label>
-              <input 
-                type="radio" 
-                name="payment" 
+              <input
+                type="radio"
+                name="payment"
                 checked={paymentPlan !== ""}
                 onChange={() => setPaymentPlan("1 місяць")}
-              /> Купити на виплату
-              <select value={paymentPlan} onChange={(e) => setPaymentPlan(e.target.value)}>
+              />{" "}
+              Купити на виплату
+              <select
+                value={paymentPlan}
+                onChange={(e) => setPaymentPlan(e.target.value)}
+              >
                 <option value="">Оберіть період</option>
                 <option value="1 місяць">1 місяць</option>
                 <option value="3 місяці">3 місяці</option>
@@ -189,16 +328,8 @@ const Product = () => {
             </label>
           </div>
         </div>
-
-        <button className="add-to-cart" onClick={handleAddToCart}>
-          <span className="cart-icon">&#128722;</span> +Додати до кошика
-        </button>
-
-        <div className="cart-info">
-          {cart.length > 0 ? <p>У кошику {cart.length} товарів</p> : <p>Кошик порожній</p>}
-        </div>
       </div>
-    </section>
+    </div>
   );
 };
 

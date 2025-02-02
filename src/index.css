@@ -654,7 +654,6 @@ form input:focus {
   background-color: #f8fbff;
   border-radius: 0.75rem;
   padding: 1.25rem;
-  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.1);
   gap: 1.25rem;
   flex: 1;
   font-family: "Poppins", sans-serif;
@@ -668,15 +667,19 @@ form input:focus {
 }
 
 .product-image img {
-  width: 35rem;
+  width: 30rem;
   border-radius: 0.75rem;
 }
 
 .product-details {
-  flex: 1;
+  /* flex: 1; */
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  /* flex-direction: column; */
+  /* justify-content: space-between; */
+  align-items: center;
+  gap: 16px;
+  margin-right: 5rem;
+  margin-bottom: 9rem;
 }
 
 .product-title {
@@ -684,8 +687,6 @@ form input:focus {
   font-weight: bold;
   color: #000;
   text-align: left;
-  position: absolute;
-  margin-right: 30rem;
 }
 
 .product-title .brand {
@@ -700,8 +701,11 @@ form input:focus {
 }
 
 .product-options {
-  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
   color: #000;
+  margin-right: 3rem;
 }
 .product-quantity input {
   border: 1px solid #ccc !important; /* Переконатися, що бордер не зелений */
@@ -710,7 +714,6 @@ form input:focus {
   text-align: center;
   font-size: 16px;
   width: 40px;
-
 }
 .quantity-input {
   border: 1px solid #ccc !important; /* Сірий бордер */
@@ -723,17 +726,14 @@ form input:focus {
   border-radius: 5px;
 }
 
-
 .product-options .option {
-  margin-left: 15rem;
-  margin-bottom: 1.9375rem;
   display: flex;
   align-items: center;
   border: 0.125rem solid #ccc;
   border-radius: 0.75rem;
   padding: 1.25rem;
   background-color: #f8fbff;
-  max-width: 50%;
+  width: 18rem;
 }
 
 .product-options label {
@@ -744,7 +744,7 @@ form input:focus {
 }
 
 .product-options select {
-  margin-left: 9rem;
+  /* margin-left: 9rem; */
   padding: 0.3125rem;
   border-radius: 0.3125rem;
   border: 0.0625rem solid #ddd;
@@ -754,20 +754,20 @@ form input:focus {
   display: flex;
   align-items: center;
   gap: 0.625rem;
-  margin-bottom: -9.25rem;
   color: #000;
   border: 0.125rem solid #438c45;
   padding: 1.25rem;
   background-color: #f8fbff;
-  width: 10rem;
-  margin-top: 5rem;
+  width: 11.7rem;
+  margin-top: 15px;
 }
 .quantity-button {
-  cursor: pointer; /* щоб був видимий курсор на кнопці */
-  border: 1px solid #ccc; /* для зручності візуального контролю */
-  background-color: #f0f0f0; /* фон кнопки */
+  cursor: pointer; 
+  border: 1px solid #ccc; 
+  background-color: #f0f0f0;
   padding: 10px;
   font-size: 16px;
+  width: 3rem;
 }
 
 .quantity-container span {
@@ -799,8 +799,6 @@ form input:focus {
   cursor: pointer;
   border-radius: 0.5rem;
   font-size: 1.125rem;
-  width: 28.5rem;
-  margin-left: 15rem;
   position: relative;
   z-index: 10;
 }
@@ -861,9 +859,9 @@ form input:focus {
 }
 
 .product-info {
-  margin: 1.25rem 0;
   font-size: 0.875rem;
   color: #666;
+margin-top: -7rem;
 }
 
 .product-specs {
@@ -876,6 +874,8 @@ form input:focus {
   line-height: 1.5;
   margin-top: 0.625rem;
   width: 42rem;
+  margin-right: 5.5rem;
+
 }
 
 .free-shipping {
@@ -883,7 +883,7 @@ form input:focus {
   font-size: 1rem;
   color: #27ae60;
   font-weight: 500;
-  padding-right: 35rem;
+  margin-right: 5rem;
 }
 a {
   text-decoration: none;
@@ -968,8 +968,6 @@ a {
 
 .product-info {
   flex-grow: 1;
-  padding-left: 20px;
-  margin-right: -25rem;
 }
 
 .product-name {
@@ -998,10 +996,10 @@ a {
 .product-quantity {
   display: flex;
   align-items: center;
+  gap: 10px;
   border: 1px solid #4caf50;
   border-radius: 5px;
   padding: 5px;
-  max-width: 7rem;
 }
 
 .quantity-btn {
@@ -1049,4 +1047,11 @@ a {
 .total_sum {
   color: #000;
   margin-left: 30rem;
+}
+
+.additional-info__wrapper {
+  display: flex;
+  justify-content: end;
+  color: black;
+  padding-right: 50px;
 }

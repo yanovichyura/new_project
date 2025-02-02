@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header, RegisterLogin, Cart, Product } from "./components";
 import { Link } from "react-router-dom";
 import { CartProvider } from "./context/CartContext";
+import products from "./components/Products";
 
 function App() {
   return (
@@ -36,41 +37,16 @@ function App() {
 
                   <section className="best_seller_section">
                     <h2>Хіти продаж</h2>
-                    <h4>Поширені товари серед наших клієнтів</h4>
                     <div className="best_seller_items">
-                      <div className="best_seller_item">
-                        <img
-                          src="../img/body_img/iphone.svg"
-                          alt="Чохол iPhone"
-                        />
-                        <h3>Чохол iPhone 16 Pro Max</h3>
-                        <p>350 грн</p>
-                      </div>
-                      <div className="best_seller_item">
-                        <img src="../img/body_img/tv.svg" alt="Телевізор" />
-                        <h3>Телевізор Samsung Crystal UHD 55"</h3>
-                        <p>28,999 грн</p>
-                      </div>
-                      <Link to="/product">
-                        <div className="best_seller_item">
-                          <a href="../html/product.html">
-                            <img
-                              src="../img/body_img/image_10_bg_removed.png.png"
-                              alt="Кросівки"
-                            />
-                            <h3>Кросівки Puma X-Ray</h3>
-                            <p>3,190 грн</p>
-                          </a>
-                        </div>
-                      </Link>
-                      <div className="best_seller_item">
-                        <img
-                          src="../img/body_img/image_5_bg_removed.png.png"
-                          alt="Сукня"
-                        />
-                        <h3>Сукня жіноча</h3>
-                        <p>1,200 грн</p>
-                      </div>
+                      {products.map((product) => (
+                        <Link key={product.id} to={`/product/${product.id}`}>
+                          <div className="best_seller_item">
+                            <img src={product.img} alt={product.name} />
+                            <h3>{product.name}</h3>
+                            <p>{product.price} грн</p>
+                          </div>
+                        </Link>
+                      ))}
                     </div>
                   </section>
 
